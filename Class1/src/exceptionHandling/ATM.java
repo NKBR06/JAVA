@@ -1,0 +1,35 @@
+package exceptionHandling;
+
+public class ATM {
+
+    private double balance = 500;
+
+    public void withdraw(double amount) throws Exception {
+        try {
+            if (amount > balance) {
+                throw new Exception("Insufficient funds");
+            }
+
+            balance -= amount;
+            System.out.println("Withdrawn: $" + amount);
+            System.out.println(balance);
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            throw e;
+ 
+
+        } finally {
+            System.out.println("Transaction complete.");
+        }
+    }
+
+    public static void main(String[] args) {
+        ATM atm = new ATM();
+        try {
+            atm.withdraw(100);
+        } catch (Exception e) {
+            System.out.println("Handled in main: " + e.getMessage());
+        }
+    }
+}
